@@ -3,6 +3,7 @@ ENV["RACK_ENV"] ||= "development"
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'sinatra/partial'
+require 'byebug'
 
 require_relative 'server'
 require_relative 'controllers/sign_up'
@@ -14,3 +15,4 @@ require_relative 'controllers/spaces'
 require_relative 'controllers/user_spaces'
 require_relative 'controllers/homepage'
 require_relative 'controllers/booking'
+require_relative 'controllers/chat'

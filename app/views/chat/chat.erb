@@ -1,0 +1,76 @@
+<body>
+  <p type="hidden" id="username" style="display: none;"><%= @username %></p>
+      <h2> Chat Room</h2>
+      <div id="chat-log">
+
+        <input type="text" id="message">
+        <button id="disconnect">Disconnect</button>
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+
+      function loadUsername() {
+        username = $('#username').text()
+      }
+
+      function addMessage(msg) {
+      $("#chat-log").append("" + msg + "<br />");
+      }
+      var socket, host;
+      host = "ws://localhost:3001";
+
+      function connect() {
+        try {
+          socket = new WebSocket(host);
+
+          addMessage("Running in 3..2..1.." + socket.readyState + " ");
+
+          socket.onopen = function() {
+            addMessage("Welcome to the Makers BNB chat room! ");
+          }
+
+          socket.onclose = function() {
+            addMessage("Socket Status: " + socket.readyState + " (closed)");
+          }
+
+          socket.onmessage = function(msg) {
+            addMessage(msg.data);
+          }
+        } catch(exception) {
+          addMessage("Error: " + exception);
+        }
+      }
+
+      $(function() {
+        connect();
+      });
+
+      function send() {
+      var text = $("#message").val();
+      if (text == '') {
+        addMessage("Please Enter a Message");
+        return;
+      }
+
+      try {
+        socket.send(username + ": " + text);
+      } catch(exception) {
+        addMessage("Failed To Send")
+      }
+
+      $("#message").val('');
+    }
+
+    $('#message').keypress(function(event) {
+      if (event.keyCode == '13') { send(); }
+    });
+
+    $("#disconnect").click(function() {
+    socket.close()
+    });
+
+    $(document).ready(loadUsername)
+    </script>
+</body>
