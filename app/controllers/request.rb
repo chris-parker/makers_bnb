@@ -29,6 +29,7 @@ class MakersBNB < Sinatra::Base
       session[:request] = request.id
       Email.new.send_mail(User.get(@space.user_id).email, 'Someone has requested your space!', erb(:'emails/requestee_email', layout: false))
       Email.new.send_mail(current_user.email, 'You have requested a space!', erb(:'emails/requester_email', layout: false))
+      SMS.new.send_request_made
       redirect to('/request/confirmation')
     end
   end

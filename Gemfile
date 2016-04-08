@@ -12,6 +12,7 @@ gem 'sinatra-flash'
 gem 'sinatra-partial'
 gem 'pony'
 gem 'stripe'
+gem 'twilio-ruby'
 group :test do
   gem 'rspec'
   gem 'capybara'
