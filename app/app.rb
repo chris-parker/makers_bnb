@@ -18,14 +18,3 @@ require_relative 'controllers/homepage'
 require_relative 'controllers/booking'
 require_relative 'controllers/payment'
 require_relative 'models/email'
-
-class MakersBNB < Sinatra::Base
-set :public_folder, proc {File.join(root)}
-
-  get '/' do
-    send_file 'views/index.erb'
-  end
-
-  # start the server if ruby file executed directly
-  run! if app_file == $0
-end
