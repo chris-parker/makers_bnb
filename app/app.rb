@@ -23,7 +23,7 @@ class MakersBNB < Sinatra::Base
 set :public_folder, proc {File.join(root)}
 
   get '/' do
-    send_file 'index.html'
+    send_file 'views/index.erb'
   end
 
   # start the server if ruby file executed directly
